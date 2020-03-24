@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace CarrotRakko\Unicode\Byte;
 
 /**
- * Represents Big Endian Byte Sequence
+ * Represents Sequence of Big Endian Bytes
  *
  * @package CarrotRakko\Unicode\Byte
  */
 final class Bytes
 {
     /**
-     * @var int[] Internal Slot for Big Endian Byte Sequence.
+     * @var int[] Internal Slot for Sequence of Big Endian Bytes.
      */
     private $bytes = [];
 
@@ -20,6 +20,7 @@ final class Bytes
      * Bytes constructor.
      *
      * @param array $bytes
+     * @throws \DomainException
      */
     public function __construct(array $bytes)
     {
@@ -44,6 +45,8 @@ final class Bytes
      * Simple Validator.
      *
      * @param array $bytes
+     * @return void
+     * @throws \DomainException
      */
     private function validate(array $bytes): void
     {

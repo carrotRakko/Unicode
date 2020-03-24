@@ -20,6 +20,7 @@ final class Byte
      * Byte constructor.
      *
      * @param int $byte
+     * @throws \DomainException
      */
     public function __construct(int $byte)
     {
@@ -42,6 +43,8 @@ final class Byte
      * Simple Validator.
      *
      * @param int $byte
+     * @return void
+     * @throws \DomainException
      */
     private function validate(int $byte): void
     {
