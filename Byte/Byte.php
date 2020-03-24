@@ -50,7 +50,7 @@ final class Byte
         }
         throw new \DomainException(
             sprintf(
-                '$byte must be between 0x00 and 0xFF. $byte = 0x%s',
+                '$byte must be between 0x00 and 0xFF. $byte = 0x%s.',
                 str_pad(
                     dechex($byte),
                     2,
