@@ -53,7 +53,7 @@ final class CodePoint
         }
         throw new \DomainException(
             sprintf(
-                '$code_point is must between 0x0000 and 0x10FFFF. $code_point = 0x%s',
+                '$code_point must be between 0x0000 and 0x10FFFF. $code_point = 0x%s',
                 str_pad(
                     dechex($code_point),
                     4,
