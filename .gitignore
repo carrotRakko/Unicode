@@ -1,0 +1,6 @@
+# When using `Intellij IDEA`.
+.idea/
+
+# When `composer install` and so on.
+vendor/
+
