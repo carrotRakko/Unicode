@@ -48,12 +48,15 @@ final class CodePoint
      */
     private function validate(int $code_point): void
     {
-        if ((0x0000 <= $code_point) && ($code_point <= 0x10FFFF)) {
+        if (
+            ((0x0000 <= $code_point) && ($code_point <= 0xD7FF))
+            || ((0xE000 <= $code_point) && ($code_point <= 0x10FFFF))
+        ) {
             return;
         }
         throw new \DomainException(
             sprintf(
-                '$code_point must be between 0x0000 and 0x10FFFF. $code_point = 0x%s.',
+                '$code_point must be between (0x0000 and 0xD7FF) or (0xE000 and 0x10FFFF). $code_point = 0x%s.',
                 str_pad(
                     dechex($code_point),
                     4,
