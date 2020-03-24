@@ -12,9 +12,9 @@ namespace CarrotRakko\Unicode\CodePoint;
 final class CodePoints
 {
     /**
-     * @var int[] Internal Slot for Sequence of Code Points.
+     * @var CodePoint[] Internal Slot for Sequence of Code Points.
      */
-    private $code_points = [];
+    private $code_points;
 
     /**
      * CodePoints constructor.
@@ -26,15 +26,13 @@ final class CodePoints
     {
         $this->validate($code_points);
 
-        foreach ($code_points as $code_point) {
-            $this->code_points[] = new CodePoint($code_point);
-        }
+        $this->code_points = $code_points;
     }
 
     /**
      * Simple Getter.
      *
-     * @return int[]
+     * @return CodePoint[]
      */
     public function getCodePoints(): array
     {
@@ -51,11 +49,19 @@ final class CodePoints
     private function validate(array $code_points): void
     {
         foreach ($code_points as $code_point) {
-            if (!is_int($code_point)) {
+            if (!is_object($code_point)) {
                 throw new \DomainException(
                     sprintf(
-                        'Each $code_point in $code_points must be type of integer. gettype($code_point) = %s.',
+                        'Each $code_point in $code_points must be type of object. gettype($code_point) = %s.',
                         gettype($code_point)
+                    )
+                );
+            }
+            if (!($code_point instanceof CodePoint)) {
+                throw new \DomainException(
+                    sprintf(
+                        'Each $code_point in $code_points must be instance of CodePoint. get_class($code_point) = %s.',
+                        get_class($code_point)
                     )
                 );
             }

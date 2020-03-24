@@ -12,9 +12,9 @@ namespace CarrotRakko\Unicode\Byte;
 final class Bytes
 {
     /**
-     * @var int[] Internal Slot for Sequence of Big Endian Bytes.
+     * @var Byte[] Internal Slot for Sequence of Big Endian Bytes.
      */
-    private $bytes = [];
+    private $bytes;
 
     /**
      * Bytes constructor.
@@ -26,15 +26,13 @@ final class Bytes
     {
         $this->validate($bytes);
 
-        foreach ($bytes as $byte) {
-            $this->bytes[] = new Byte($byte);
-        }
+        $this->bytes = $bytes;
     }
 
     /**
      * Simple Getter.
      *
-     * @return int[]
+     * @return Byte[]
      */
     public function getBytes(): array
     {
@@ -51,11 +49,19 @@ final class Bytes
     private function validate(array $bytes): void
     {
         foreach ($bytes as $byte) {
-            if (!is_int($byte)) {
+            if (!is_object($byte)) {
                 throw new \DomainException(
                     sprintf(
-                        'Each $byte in $bytes must be type of integer. gettype($byte) = %s.',
+                        'Each $byte in $bytes must be type of object. gettype($byte) = %s.',
                         gettype($byte)
+                    )
+                );
+            }
+            if (!($byte instanceof Byte)) {
+                throw new \DomainException(
+                    sprintf(
+                        'Each $byte in $bytes must be instance of Byte. get_class($byte) = %s.',
+                        get_class($byte)
                     )
                 );
             }
